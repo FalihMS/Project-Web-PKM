@@ -1,17 +1,14 @@
 ## Cara menggunakan Aplikasi
-- Jalankan dengan memasukkan di terminal 
 
-```terminal
-php artisan serve
-```
-
-- Buat database untuk menyimpan tabel
+- Buat database untuk menyimpan tabel di phpMySql
 - 'your_database' bisa disesuaikan dengan nama database
+- nama pkm disarankan 'pkm'
 ```sql
 CREATE DATABASE `your_database`
 ```
 
 - Setting file .env untuk masuk ke database yang telah dibuat
+- Apabila nama database adalah 'pkm' maka bisa melewati tahap ini
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -28,8 +25,8 @@ php artisan migrate
 
 - Buat akun admin dengan seeding
 
-- Email default admin : admin@admin.com  
-- Password default admin : admin
+- Email default admin : superAdmin@admin.com  
+- Password default admin : secret
 - Login admin dan user satu page
 
 ```cmd
@@ -53,29 +50,18 @@ php artisan serve
 127.0.0.1:8000
 ```
 
-##Fitur yang sudah tersedia
-###Untuk User
+Fitur yang sudah tersedia
+Untuk User
 
 - Login + Register ketua
 - Registrasi PKM
 - Input Class Sesuai Dengan Lecturer Yang Sudah Dibuat
 - Upload File Sesuai Session Yang Dibuat Admin
 
-###Untuk Admin
+Untuk Admin
 
 - Add New Lecturer
 - Add Class Sesuai Lecturer
 - Add Session Untuk Jadwal Upload
-
-##On development
-
-###Untuk User
-
-- Semua Validasi 
-- Return Message Setelah Berhasil / Gagal
-- Download kembali file yang telah diupload user
-
-###Untuk Admin
-
-- View Semua Uploaded File
-- Download Uploaded File
+- Add Term
+- Download uploaded pkm
