@@ -63,7 +63,5 @@ class AdminController extends Controller
         $upload = Upload::where('idPkm',$id)->first();
         $pathToFile = $upload['file'];
         return response()->download($pathToFile);
-
-
-
+    }
 }
