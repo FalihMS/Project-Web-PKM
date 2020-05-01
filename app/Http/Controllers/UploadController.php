@@ -28,7 +28,7 @@ class UploadController extends Controller
         }
         $nama_file = $titleName.'.'.$file->getClientOriginalExtension();
         $file->move($tujuan_upload,$file->getClientOriginalName());
-        return $path;
+        return $tujuan_upload.'/'.$file->getClientOriginalName();
     }
     private function generatePkm()
     {
