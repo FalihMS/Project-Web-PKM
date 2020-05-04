@@ -28,7 +28,7 @@ class UploadController extends Controller
         }
         $nama_file = $titleName.'.'.$file->getClientOriginalExtension();
         $file->move($tujuan_upload,$nama_file);
-        return $tujuan_upload.'/'.$nama_file;
+//        return $tujuan_upload.'/'.$nama_file;
     }
     private function generatePkm()
     {
@@ -69,35 +69,57 @@ class UploadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    private function checkExtension(Request $request){
+        $file = $request->file('file');
+        if($file->getClientOriginalExtension() == 'docx' || $file->getClientOriginalExtension() == 'doc'){
+            return true;
+        }else{
+            return false;
+        };
+    }
+    private function checkFileSize(Request $request){
+        $file = $request->file('file');
+        if($file->getSize() < 1024*5*1000){
+            return true;
+        }else{
+            return false;
+        };
+    }
     public function store(Request $request)
     {
-            $nama_file = $this->moveToDisk($request);
-
-                        $upload = Upload::where([['idPkm', $request->get('idPkm')],['session_id',$request->get('session_id')]])->get();
-
-                        if (sizeof($upload) == 1){
-                            //kalo cuman update data
-                            Upload::where([['idPkm', $request->idPkm],['session_id',$request->session_id]])
-                                ->update(['last_upload' => date("Y-m-d H:i:s",time())]);
-                        }else {
-
-                            //kalo belum pernah upload
-
-                            $upload = Upload::Create(
-                                [
-                                    'idPkm' => $request->idPkm,
-                                    'session_id' => $request->session_id,
-                                    'file' => $nama_file,
-                                    'last_upload' => date("Y-m-d H:i:s", time())
-                                ]
-                            );
-
-                            $idPkm = $request->get('idPkm');
-                            DB::table('pkms')
-                                ->where('id', '=', $idPkm)
-                                ->update(['status' => 'Uploaded','uploaded' => now()]);
-                        }
-                        return redirect()->route('home')->with('success', 'Pkm Have been Uploaded');
+        if(!$this->checkExtension($request)){
+            return back()->with('error', 'Incorrect Uploaded File Extension');
+        }else if(!$this->checkFileSize($request)){
+            return back()->with('error', 'Incorrect Uploaded File Size');
+        }else {
+//            $nama_file = $this->moveToDisk($request);
+//
+//                        $upload = Upload::where([['idPkm', $request->get('idPkm')],['session_id',$request->get('session_id')]])->get();
+//
+//                        if (sizeof($upload) == 1){
+//                            //kalo cuman update data
+//                            Upload::where([['idPkm', $request->idPkm],['session_id',$request->session_id]])
+//                                ->update(['last_upload' => date("Y-m-d H:i:s",time())]);
+//                        }else {
+//
+//                            //kalo belum pernah upload
+//
+//                            $upload = Upload::Create(
+//                                [
+//                                    'idPkm' => $request->idPkm,
+//                                    'session_id' => $request->session_id,
+//                                    'file' => $nama_file,
+//                                    'last_upload' => date("Y-m-d H:i:s", time())
+//                                ]
+//                            );
+//
+//                            $idPkm = $request->get('idPkm');
+//                            DB::table('pkms')
+//                                ->where('id', '=', $idPkm)
+//                                ->update(['status' => 'Uploaded','uploaded' => now()]);
+//                        }
+//                        return redirect()->route('home')->with('success', 'Pkm Have been Uploaded');
+        }
     }
 
     /**
