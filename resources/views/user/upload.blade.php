@@ -2,33 +2,33 @@
 @section('title','Upload PKM')
 @section('script')
     <script>
-        function fileValidation(){
-            var fileInput = document.getElementById('file');
-            var filePath = fileInput.value;
-            var allowedExtensions = /(\.doc|\.docx)$/i;
-            if(!allowedExtensions.exec(filePath)) {
-                alert('Please upload file having extensions .doc and .docx only.');
-                fileInput.value = '';
-                return false;
-            }
-
-            var fi = document.getElementById('file'); // GET THE FILE INPUT.
-
-            // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
-            if (fi.files.length > 0) {
-                // RUN A LOOP TO CHECK EACH SELECTED FILE.
-                for (var i = 0; i <= fi.files.length - 1; i++) {
-
-                    var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
-                    var fsize_real = Math.round((fsize / 1024));
-
-                    if(fsize_real >= 5120){
-                        alert("File Size too Big");
-                        return false;
-                    }
-                }
-            }
-        }
+        // function fileValidation(){
+        //     var fileInput = document.getElementById('file');
+        //     var filePath = fileInput.value;
+        //     var allowedExtensions = /(\.doc|\.docx)$/i;
+        //     if(!allowedExtensions.exec(filePath)) {
+        //         alert('Please upload file having extensions .doc and .docx only.');
+        //         fileInput.value = '';
+        //         return false;
+        //     }
+        //
+        //     var fi = document.getElementById('file'); // GET THE FILE INPUT.
+        //
+        //     // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+        //     if (fi.files.length > 0) {
+        //         // RUN A LOOP TO CHECK EACH SELECTED FILE.
+        //         for (var i = 0; i <= fi.files.length - 1; i++) {
+        //
+        //             var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+        //             var fsize_real = Math.round((fsize / 1024));
+        //
+        //             if(fsize_real >= 5120){
+        //                 alert("File Size too Big");
+        //                 return false;
+        //             }
+        //         }
+        //     }
+        // }
 
     </script>
 @endsection
@@ -98,14 +98,16 @@
                         </div>
                         <div class="text-danger">Notes:</div>
                         <div class="row">
-                            <ul class="list-group">
-                                <li class="list-group-item text-danger border-0"> 1. PKM yang diupload adalah PKM yang sudah Final dan sudah direvisi</li>
-                                <li class="list-group-item text-danger border-0"> 2. Extension File harus menggunakan .doc atau .docx</li>
-                                <li class="list-group-item text-danger border-0"> 3. Maximal dari ukuran file adalah 5 MB</li>
+                            <ul>
+                                <li class="list-item text-danger border-0"> PKM yang diupload adalah PKM yang sudah Final dan sudah direvisi</li>
+                                <li class="list-item text-danger border-0"> Extension File harus menggunakan .doc atau .docx</li>
+                                <li class="list-item text-danger border-0"> Maximal dari ukuran file adalah 5 MB</li>
+                                <li class="list-item text-danger border-0"> Pastikan Detail PKM yang ditampilkan sudah sesuai</li>
+                                <li class="list-item text-danger border-0"> MAHASISWA HANYA DAPAT MENGUNGGAH 1X</li>
                             </ul>
                         </div>
                         <div class="row">
-                            <div class="col-4 text-left mt-3">
+                            <div class="col text-left mt-3 text-center">
                                 <button type="submit" class="btn btn-primary px-5">
                                     {{ __('Submit') }}
                                 </button>
