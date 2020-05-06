@@ -92,33 +92,33 @@ class UploadController extends Controller
         }else if(!$this->checkFileSize($request)){
             return back()->with('error', 'Incorrect Uploaded File Size');
         }else {
-//            $nama_file = $this->moveToDisk($request);
-//
-//                        $upload = Upload::where([['idPkm', $request->get('idPkm')],['session_id',$request->get('session_id')]])->get();
-//
-//                        if (sizeof($upload) == 1){
-//                            //kalo cuman update data
-//                            Upload::where([['idPkm', $request->idPkm],['session_id',$request->session_id]])
-//                                ->update(['last_upload' => date("Y-m-d H:i:s",time())]);
-//                        }else {
-//
-//                            //kalo belum pernah upload
-//
-//                            $upload = Upload::Create(
-//                                [
-//                                    'idPkm' => $request->idPkm,
-//                                    'session_id' => $request->session_id,
-//                                    'file' => $nama_file,
-//                                    'last_upload' => date("Y-m-d H:i:s", time())
-//                                ]
-//                            );
-//
-//                            $idPkm = $request->get('idPkm');
-//                            DB::table('pkms')
-//                                ->where('id', '=', $idPkm)
-//                                ->update(['status' => 'Uploaded','uploaded' => now()]);
-//                        }
-//                        return redirect()->route('home')->with('success', 'Pkm Have been Uploaded');
+           $nama_file = $this->moveToDisk($request);
+
+                       $upload = Upload::where([['idPkm', $request->get('idPkm')],['session_id',$request->get('session_id')]])->get();
+
+                       if (sizeof($upload) == 1){
+                           //kalo cuman update data
+                           Upload::where([['idPkm', $request->idPkm],['session_id',$request->session_id]])
+                               ->update(['last_upload' => date("Y-m-d H:i:s",time())]);
+                       }else {
+
+                           //kalo belum pernah upload
+
+                           $upload = Upload::Create(
+                               [
+                                   'idPkm' => $request->idPkm,
+                                   'session_id' => $request->session_id,
+                                   'file' => $nama_file,
+                                   'last_upload' => date("Y-m-d H:i:s", time())
+                               ]
+                           );
+
+                           $idPkm = $request->get('idPkm');
+                           DB::table('pkms')
+                               ->where('id', '=', $idPkm)
+                               ->update(['status' => 'Uploaded','uploaded' => now()]);
+                       }
+                       return redirect()->route('home')->with('success', 'Pkm Have been Uploaded');
         }
     }
 
