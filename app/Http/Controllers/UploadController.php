@@ -6,6 +6,7 @@ use App\pkm;
 use App\session;
 use App\Upload;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,7 @@ class UploadController extends Controller
         }
         $nama_file = $titleName.'.'.$file->getClientOriginalExtension();
         $file->move($tujuan_upload,$nama_file);
-//        return $tujuan_upload.'/'.$nama_file;
+        return $tujuan_upload.'/'.$nama_file;
     }
     private function generatePkm()
     {
@@ -133,8 +134,16 @@ class UploadController extends Controller
         //
         $pkm = $this->generatePkm();
         $session = $this->generateSession($id);
+        $upload = upload::where([['idPkm', $pkm->id]])->get();
+
+        if(sizeof($upload) == 1){
+            $isUploading = true;
+        }else{
+            $isUploading = false;
+        }
         return view('user.upload')
             ->with('pkm', $pkm)
+            ->with('isUploading', $isUploading)
             ->with('session', $session);
 
     }

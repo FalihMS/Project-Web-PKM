@@ -45,37 +45,38 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        <div class="row">
-                            <div class="col-4 text-right">Pkm Title :</div>
-                            <div class="col-8">{{ $pkm['title'] }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 text-right">Pkm Type :</div>
-                            <div class="col-8">{{ $pkm['type'] }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 text-right">Lecturer :</div>
-                            <div class="col-8">{{ strtoupper($pkm->lecturer->code . ' - ' .  $pkm->lecturer->name) }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 text-right">Class :</div>
-                            <div class="col-8">{{ $pkm->class}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 text-right">Member 1 :</div>
-                            <div class="col-8">{{ $pkm->member_1_nim . ' - '. $pkm->member_1_nama}}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 text-right">Member 2 :</div>
-                            <div class="col-8">{{ $pkm->member_2_nim . ' - '. $pkm->member_2_nama}}</div>
-                        </div>
+                    <div class="row">
+                        <div class="col-4 text-right">Pkm Title :</div>
+                        <div class="col-8">{{ $pkm['title'] }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-right">Pkm Type :</div>
+                        <div class="col-8">{{ $pkm['type'] }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-right">Lecturer :</div>
+                        <div class="col-8">{{ strtoupper($pkm->lecturer->code . ' - ' .  $pkm->lecturer->name) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-right">Class :</div>
+                        <div class="col-8">{{ $pkm->class}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-right">Member 1 :</div>
+                        <div class="col-8">{{ $pkm->member_1_nim . ' - '. $pkm->member_1_nama}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-right">Member 2 :</div>
+                        <div class="col-8">{{ $pkm->member_2_nim . ' - '. $pkm->member_2_nama}}</div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-8 mt-3">
             <div class="card">
-                <div class="card-header">Uploads Detail</div>
+                <div class="card-header">Session Information</div>
+
                 <div class="card-body">
                     <div class="row">
                         <div class="col-4 text-right">Session :</div>
@@ -85,40 +86,57 @@
                         <div class="col-4 text-right">Deadline :</div>
                         <div class="col-8">{{ $session['deadline'] }}</div>
                     </div>
-                    <form action="{{url('upload')}}" method="post" enctype="multipart/form-data"
-                           onsubmit="return fileValidation()" >
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 mt-3">
+            <div class="card">
+                @if($isUploading)
+                    <div class="card-body">
                         <div class="row">
-                            <div class="col-4 text-right">Upload File</div>
+                            <div class="col text-center font-italic text-danger">You Already Upload file in this session</div>
+                        </div>
+                    </div>
+                @else
+                    <div class="card-header">Uploads Detail</div>
+                    <div class="card-body">
+                        <form action="{{url('upload')}}" method="post" enctype="multipart/form-data"
+                              onsubmit="return fileValidation()" >
+                            <div class="row">
+                                <div class="col-4 text-right">Upload File</div>
                                 @csrf
                                 <div class="col-8">
-                                        <input type="text" name="idPkm" id="idPkm" value="{{$pkm->id}}" hidden>
-                                        <input type="text" name="session_id" id="session_id" value="{{$session->id}}" hidden>
-                                        <input type="file" name="file" id="file" required>
+                                    <input type="text" name="idPkm" id="idPkm" value="{{$pkm->id}}" hidden>
+                                    <input type="text" name="session_id" id="session_id" value="{{$session->id}}" hidden>
+                                    <input type="file" name="file" id="file" required>
                                 </div>
-                        </div>
-                        <div class="text-danger">Notes:</div>
-                        <div class="row">
-                            <ul>
-                                <li class="list-item text-danger border-0"> PKM yang diupload adalah PKM yang sudah Final dan sudah direvisi</li>
-                                <li class="list-item text-danger border-0"> Extension File harus menggunakan .doc atau .docx</li>
-                                <li class="list-item text-danger border-0"> Maximal dari ukuran file adalah 5 MB</li>
-                                <li class="list-item text-danger border-0"> Pastikan Detail PKM yang ditampilkan sudah sesuai</li>
-                                <li class="list-item text-danger border-0"> MAHASISWA HANYA DAPAT MENGUNGGAH 1X</li>
-                            </ul>
-                        </div>
-                        <div class="row">
-                            <div class="col text-left mt-3 text-center">
-                                <button type="submit" class="btn btn-primary px-5">
-                                    {{ __('Submit') }}
-                                </button>
                             </div>
-                        </div>
-                    </form>
+                            <div class="text-danger">Notes:</div>
+                            <div class="row">
+                                <ol>
+                                    <li class="text-danger border-0"> PKM yang diupload adalah PKM yang sudah Final dan sudah direvisi</li>
+                                    <li class="text-danger border-0"> Extension File harus menggunakan .doc atau .docx</li>
+                                    <li class="text-danger border-0"> Maximal dari ukuran file adalah 5 MB</li>
+                                    <li class="text-danger border-0"> Pastikan Detail PKM yang ditampilkan sudah sesuai</li>
+                                    <li class="text-danger border-0"> MAHASISWA HANYA DAPAT MENGUNGGAH 1X</li>
+                                </ol>
+                            </div>
+                            <div class="row">
+                                <div class="col text-left mt-3 text-center">
+                                    <button type="submit" class="btn btn-primary px-5">
+                                        {{ __('Submit') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
 
 
-                </div>
+                    </div>
 
 
+
+                @endif
             </div>
         </div>
     </div>
