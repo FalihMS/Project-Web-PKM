@@ -60,7 +60,9 @@ class HomeController extends Controller
         }
 
     }
-
+    public function afterRegister(){
+        return redirect('/pkm')->with('success','You Have been registered');
+    }
     private function generatePkm()
     {
         $id = Auth::id();

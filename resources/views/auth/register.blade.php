@@ -80,6 +80,15 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="phone">{{ __('Phone Number') }}</label>
+
+
+                        <input id="phone" type="text" class="form-control"
+                               name="phone" required>
+
+                    </div>
+
+                    <div class="form-group">
 
                         <button type="submit" class="btn btn-primary btn -block">
                             {{ __('Register') }}

@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/pkm/successLogin';
 
     /**
      * Create a new controller instance.
@@ -70,6 +70,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'phone' => $data['phone']
         ]);
 
         $user
@@ -79,4 +80,5 @@ class RegisterController extends Controller
         return $user;
 
     }
+
 }

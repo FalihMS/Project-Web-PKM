@@ -19,6 +19,30 @@ class AdminController extends Controller
     {
         return view('admin.index');
     }
+    public function export(){
+        $headers = array(
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=file.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        );
+
+        $pkms = pkm::orderBy('class','desc')->get();
+        $columns = array('No', 'Title', 'Class', 'Lecturer');
+
+        $callback = function() use ($pkms, $columns)
+        {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+            $i = 1;
+            foreach($pkms as $pkm) {
+                fputcsv($file, array($i++, $pkm->title, $pkm->class, $pkm->lecturer->name));
+            }
+            fclose($file);
+        };
+        return response()->stream($callback, 200, $headers);
+    }
     public function showLecturer()
     {
         $lecturers = lecturer::all();

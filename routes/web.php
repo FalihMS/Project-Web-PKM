@@ -17,11 +17,13 @@ Auth::routes();
 
 Route::get('/admin/addAdmin','AdminController@showAllAdmin')->middleware('admin');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/pkm/successLogin', 'HomeController@afterRegister');
 Route::get('/admin','AdminController@index')->middleware('admin');
 Route::get('/admin/showLecturer','AdminController@showLecturer')->middleware('admin');
 Route::get('/admin/showSession','AdminController@showSession')->middleware('admin');
 Route::get('/admin/showTerm','AdminController@showTerm')->middleware('admin');
 Route::get('/admin/showAll','AdminController@showAll')->middleware('admin');
+Route::get('/admin/export','AdminController@export')->middleware('admin');
 Route::get('/download/{id}','AdminController@download')->middleware('admin')->name('download');
 Route::get('lecturer/{id}','LecturerController@show')->name('detail_lecturer');
 Route::get('session/{id}','SessionController@show')->name('detail_session');

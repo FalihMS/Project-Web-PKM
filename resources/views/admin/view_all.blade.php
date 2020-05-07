@@ -6,7 +6,6 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">View All PKMs</div>
-
                     <div class="card-body">
                         <table class="w-100 table" >
                             <tr>
@@ -27,12 +26,21 @@
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $pkm['title'] }}</td>
                                         <td>{{ $pkm['class'] }}</td>
-                                        <td>{{ $pkm->lecturer->name }}</td>`
+                                        <td>{{ $pkm->lecturer->name }}</td>
                                         <td><a href="{{ route('download',['id'=>$pkm['id']]) }}">Download File</a></td>
                                     </tr>
                                 @endforeach
                             @endif
                         </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mt-3">
+                <div class="card border-0">
+                    <div class="card-body row">
+                        <div class="col">
+                            <a href="export" class="btn btn-outline-primary"> Export as Excel</a>
+                        </div>
                     </div>
                 </div>
             </div>

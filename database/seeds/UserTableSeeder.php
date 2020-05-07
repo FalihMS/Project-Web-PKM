@@ -20,6 +20,7 @@ class UserTableSeeder extends Seeder
         $employee->nim = '0000000000';
         $employee->email = 'superAdmin@example.com';
         $employee->password = bcrypt('secret');
+        $employee->phone = '000000000000';
         $employee->save();
         $employee->roles()->attach($role_superAdmin);
 
