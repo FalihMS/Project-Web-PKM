@@ -22,15 +22,16 @@ class CreatePkmsTable extends Migration
             $table->string('type');
             $table->string('lecturer_id');
             $table->string('class');
+
             $table->string('member_1_nim');
             $table->string('member_1_nama');
+            $table->string('member_1_email');
+            $table->string('member_1_phone');
+
             $table->string('member_2_nim');
             $table->string('member_2_nama');
-            $table->string('status');
-            $table->date('created');
-            $table->date('uploaded')->nullable();
-            $table->date('revision')->nullable();
-            $table->text('comment')->nullable();
+            $table->string('member_2_email');
+            $table->string('member_2_phone');
 
         });
     }

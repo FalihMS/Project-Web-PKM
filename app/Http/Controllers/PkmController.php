@@ -21,10 +21,12 @@ class PkmController extends Controller
         $pkm->class = $request->get('class');
         $pkm->member_1_nim = $request->get('member_1_nim');
         $pkm->member_1_nama = $request->get('member_1_nama');
+        $pkm->member_1_email = $request->get('member_1_email');
+        $pkm->member_1_phone = $request->get('member_1_phone');
         $pkm->member_2_nim = $request->get('member_2_nim');
         $pkm->member_2_nama = $request->get('member_2_nama');
-        $pkm->status = 'Not Upload';
-        $pkm->created = Carbon::now();
+        $pkm->member_2_email = $request->get('member_2_email');
+        $pkm->member_2_phone = $request->get('member_2_phone');
         return $pkm;
     }
     public function getClass($id){
@@ -67,14 +69,17 @@ class PkmController extends Controller
     public function store(Request $request)
     {
         //validasi data masuk
-        if ($this->checkData($request)) {
-
+        if (!$this->checkData($request)) {
+            echo(str_word_count($request->title));
+            echo('true');
             //dari frontend ke back end
             $pkm = $this->createData($request);
 
             //save data
             $pkm->save();
             return redirect()->route('home')->with('success', 'Pkm Have been Added');
+        }else{
+            return back()->with('error', 'PKM Title Too Long');
         }
     }
 
@@ -125,6 +130,10 @@ class PkmController extends Controller
 
     private function checkData($request)
     {
-        return true;
+        if(str_word_count($request->title) >= 12){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

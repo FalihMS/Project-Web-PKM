@@ -3,13 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            @if ($message = Session::get('error'))
-                <div class="alert alert-danger alert-block col-10">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>{{ $message }}</strong>
-                </div>
-            @endif
-            <div class="col-md-10">
+            <div class="col-md">
                 <div class="card">
 
                     <div class="card-header">Create New PKM</div>
@@ -88,9 +82,8 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="form-group row">
-                                <label for="member_1_nim" class="col-md-2 col-form-label text-md-right">{{ __('Member NIM 1') }}</label>
+                                <label for="member_1_nim" class="col-md-2 col-form-label text-md-right">{{ __('NIM Member 1') }}</label>
 
                                 <div class="col-md-4">
                                     <input id="member_1_nim" type="text" class="form-control @error('member_1_nim') is-invalid @enderror" name="member_1_nim" value="{{ old('member_1_nim') }}" required autocomplete="member_1_nim" autofocus
@@ -102,20 +95,7 @@
                                 </span>
                                     @enderror
                                 </div>
-                                <label for="member_1_nama" class="col-md-2 col-form-label text-md-right">{{ __('Member Name 1') }}</label>
-
-                                <div class="col-md-4">
-                                    <input id="member_1_nama" type="text" class="form-control @error('member_1_nama') is-invalid @enderror" name="member_1_nama" value="{{ old('member_1_nama') }}" required autocomplete="member_1_nama" autofocus>
-
-                                    @error('member_1_nama')
-                                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="member_2_nim" class="col-md-2 col-form-label text-md-right">{{ __('Member NIM 2') }}</label>
+                                <label for="member_2_nim" class="col-md-2 col-form-label text-md-right">{{ __('NIM Member 2') }}</label>
 
                                 <div class="col-md-4">
                                     <input id="member_2_nim" type="text" class="form-control @error('member_2_nim') is-invalid @enderror" name="member_2_nim" value="{{ old('member_2_nim') }}" required autocomplete="member_2_nim" autofocus
@@ -127,7 +107,20 @@
                                 </span>
                                     @enderror
                                 </div>
-                                <label for="member_2_nama" class="col-md-2 col-form-label text-md-right">{{ __('Member Name 2') }}</label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="member_1_nama" class="col-md-2 col-form-label text-md-right">{{ __('Name Member 1') }}</label>
+
+                                <div class="col-md-4">
+                                    <input id="member_1_nama" type="text" class="form-control @error('member_1_nama') is-invalid @enderror" name="member_1_nama" value="{{ old('member_1_nama') }}" required autocomplete="member_1_nama" autofocus>
+
+                                    @error('member_1_nama')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                                <label for="member_2_nama" class="col-md-2 col-form-label text-md-right">{{ __('Name Member 2') }}</label>
 
                                 <div class="col-md-4">
                                     <input id="member_2_nama" type="text" class="form-control @error('member_2_nama') is-invalid @enderror" name="member_2_nama" value="{{ old('member_2_nama') }}" required autocomplete="member_2_nama" autofocus>
@@ -139,10 +132,58 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="member_1_email" class="col-md-2 col-form-label text-md-right">{{ __('Email Member 1') }}</label>
+
+                                <div class="col-md-4">
+                                    <input id="member_1_email" type="text" class="form-control @error('member_1_email') is-invalid @enderror" name="member_1_email" value="{{ old('member_1_email') }}" required autofocus>
+
+                                    @error('member_1_email')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                                <label for="member_2_email" class="col-md-2 col-form-label text-md-right">{{ __('Email Member 2') }}</label>
+
+                                <div class="col-md-4">
+                                    <input id="member_2_email" type="text" class="form-control @error('member_2_email') is-invalid @enderror" name="member_2_email" value="{{ old('member_2_email') }}" required autofocus>
+
+                                    @error('member_2_nama')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="member_1_phone" class="col-md-2 col-form-label text-md-right">{{ __('Phone Member 1') }}</label>
+
+                                <div class="col-md-4">
+                                    <input id="member_1_phone" type="text" class="form-control @error('member_1_phone') is-invalid @enderror" name="member_1_phone" value="{{ old('member_1_phone') }}" required autofocus>
+
+                                    @error('member_1_phone')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                                <label for="member_2_phone" class="col-md-2 col-form-label text-md-right">{{ __('Phone Member 2') }}</label>
+
+                                <div class="col-md-4">
+                                    <input id="member_2_phone" type="text" class="form-control @error('member_2_phone') is-invalid @enderror" name="member_2_phone" value="{{ old('member_2_phone') }}" required autofocus>
+
+                                    @error('member_2_phone')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <input type="text" name="idLeader" id="idLeader" value="{{$id}}" style="display:none;">
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-2">
-                                    <button type="submit" class="btn btn-primary px-5">
+                            <div class="form-group row mb-0 text-center">
+                                <div class="col mt-md-3">
+                                    <button type="submit" class="btn btn-primary px-5 ">
                                         {{ __('Create') }}
                                     </button>
                                 </div>

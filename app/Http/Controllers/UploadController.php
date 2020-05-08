@@ -27,7 +27,7 @@ class UploadController extends Controller
         if(!File::isDirectory($path)){
             File::makeDirectory($path, 0777, true, true);
         }
-        $nama_file = $titleName.'.'.$file->getClientOriginalExtension();
+        $nama_file = '';
         $file->move($tujuan_upload,$nama_file);
         return $tujuan_upload.'/'.$nama_file;
     }
@@ -134,7 +134,7 @@ class UploadController extends Controller
         //
         $pkm = $this->generatePkm();
         $session = $this->generateSession($id);
-        $upload = upload::where([['idPkm', $pkm->id]])->get();
+        $upload = upload::where([['idPkm', $pkm->id],['session_id', $id]])->get();
 
         if(sizeof($upload) == 1){
             $isUploading = true;
@@ -184,5 +184,6 @@ class UploadController extends Controller
 
     private function checkData(Request $request)
     {
+
     }
 }
