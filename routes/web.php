@@ -37,5 +37,5 @@ Route::resource('pkm','PkmController');
 Route::resource('lecturer', 'LecturerController');
 Route::resource('session', 'SessionController');
 Route::resource('upload', 'UploadController');
-Route::resource('adminRegis','RegisterAdminController');
+Route::resource('adminRegis','RegisterAdminController')->name('adminRegister');
 Route::resource('term','TermController');

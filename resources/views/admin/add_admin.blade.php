@@ -17,7 +17,7 @@
                            </div>
                        @endif
 
-                       <form action={{url('adminRegister')}} method="post">
+                       <form action="{{url('adminRegister')}}" method="post">
                            @csrf
                            <div class="form-group row">
                                <label for="name" class="col-md-4 col-form-label text-md-right">{{__('Admin Name')}}</label>
