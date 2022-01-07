@@ -21,7 +21,7 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="/pkm">
+                        <form method="POST" action="{{url('/pkm')}}">
                             @csrf
                             @method('POST')
                             <div class="form-group row">
